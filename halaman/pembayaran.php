@@ -178,11 +178,6 @@ $(document).ready(function() {
                                                 <label>Tahun Bayar</label>
                                                 <select name="tahun_bayar" class="form-select" required>
                                                     <option value="<?= $row['tahun'] ?>"><?= $row['tahun'] ?></option>
-                                                    <?php
-                                                    for($i=2020; $i<=date('Y'); $i++){
-                                                        echo "<option value='$i'>$i</option>";
-                                                    }
-                                                ?>
                                                 </select>
                                             </div>
                                         </div>

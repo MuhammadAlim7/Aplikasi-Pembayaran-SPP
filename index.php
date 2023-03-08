@@ -196,7 +196,7 @@
 
             <form action="" method="post">
 
-                <button type="submit" class="nav_link" name=" logout" style="background: none; border: none;">
+                <button type="submit" class="nav_link" name="logout" style="background: none; border: none;">
                     <i class='bx bx-log-out nav_icon'></i>
                     <span class="nav_name">SignOut</span>
                 </button>

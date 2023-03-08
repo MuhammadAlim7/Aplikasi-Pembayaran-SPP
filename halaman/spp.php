@@ -141,7 +141,7 @@ $(document).ready(function() {
                 
                     include "conn.php";
                     $no = 1;
-                    $query = mysqli_query($kon, "SELECT * FROM spp");
+                    $query = mysqli_query($kon, "SELECT * FROM spp ORDER BY tahun ASC");
                     while ($row = mysqli_fetch_array($query)) {
                                 
                 ?>
@@ -269,7 +269,7 @@ $(document).ready(function() {
                                             <input type="text" name="tahun" class="form-control" placeholder="Tahun"
                                                 required>
                                         </div>
-                                        <div class=" mb-1">
+                                        <div class=" mb-4">
                                             <label for="nominal">Nominal</label>
                                             <input type="number" name="nominal" class="form-control"
                                                 placeholder="Nominal" required>

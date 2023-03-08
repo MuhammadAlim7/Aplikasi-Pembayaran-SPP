@@ -170,7 +170,7 @@ $(document).ready(function() {
                                         </div>
                                         <div class="mb-1">
                                             <button type="submit" class="red btn btn-sm" name="hapus"
-                                                title="Simpan Data">
+                                                title="Hapus Data">
                                                 Hapus</button>
                                             <a href="" class="green btn btn-sm" data-bs-dismiss="modal"
                                                 aria-label="Close">

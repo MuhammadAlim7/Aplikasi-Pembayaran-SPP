@@ -18,8 +18,8 @@ $(document).ready(function() {
     dataTable = $("#myTable").DataTable({
         "pageLength": 5,
         "lengthMenu": [
-            [5, 10],
-            [5, 10]
+            [5, 100],
+            [5, 100]
         ]
 
     });
@@ -39,13 +39,32 @@ $(document).ready(function() {
         dataTable.column(3).search(status).draw();
     })
 });
+
+function printData() {
+    var divToPrint = document.getElementById("myTable");
+    var newWin = window.open("");
+    newWin.document.write('<html><head><title>Cetak Laporan</title>');
+    newWin.document.write('<style>');
+    newWin.document.write('table { border-collapse: collapse; width: 100%; }');
+    newWin.document.write('th, td { text-align: left; padding: 8px; }');
+    newWin.document.write('tr:nth-child(even) { background-color: #f2f2f2; }');
+    newWin.document.write('th { background-color: #E5F0FF; color: white; }');
+    newWin.document.write('</style>');
+    newWin.document.write('</head><body>');
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.document.write('</body></html>');
+    newWin.print();
+    newWin.close();
+}
 </script>
+
 
 <div class="card">
     <div class="card-header">Halaman Laporan </div>
     <div class="card-body">
         <div class="pb-3">
-            <a href="cetak" class="blue btn btn-sm " name="cetak">
+
+            <a onclick="printData()" class="blue btn btn-sm " name="cetak">
                 Cetak Laporan
             </a>
             <div class="btn-group submitter-group float-right">
@@ -53,7 +72,7 @@ $(document).ready(function() {
                     <option value="">Tahun</option>
                     <?php
                             include 'conn.php';
-                            $spp = mysqli_query($kon , "SELECT tahun FROM spp ORDER BY id_spp ASC");
+                            $spp = mysqli_query($kon , "SELECT DISTINCT tahun FROM spp ORDER BY tahun ASC;");
                             foreach($spp as $data_spp){
                         ?>
                     <option value="<?= $data_spp['tahun'] ?>">
@@ -77,26 +96,26 @@ $(document).ready(function() {
             </div>
         </div>
 
+        <div id="printableTable">
+            <table class="table table-bordered" id="myTable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>NISN</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Tahun SPP</th>
+                        <th>Bulan SPP</th>
+                        <th>Nominal Dibayar</th>
+                        <th>Sudah Dibayar</th>
+                        <th>Kekurangan</th>
+                        <th>Tanggal Dibayar</th>
+                        <th>Petugas</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        <table class="table table-bordered" id="myTable">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>NISN</th>
-                    <th>Nama</th>
-                    <th>Kelas</th>
-                    <th>Tahun SPP</th>
-                    <th>Bulan SPP</th>
-                    <th>Nominal Dibayar</th>
-                    <th>Sudah Dibayar</th>
-                    <th>Kekurangan</th>
-                    <th>Tanggal Dibayar</th>
-                    <th>Petugas</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php
+                    <?php
                     include 'conn.php';
                     $no = 1;
                     $sql = "SELECT*FROM pembayaran,siswa,kelas,spp,petugas 
@@ -113,25 +132,28 @@ $(document).ready(function() {
                         $kekurangan = $row['nominal']-$sudah_bayar;
                 ?>
 
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= $row['nisn'] ?></td>
-                    <td><?= $row['nama'] ?></td>
-                    <td><?= $row['nama_kelas'] ?></td>
-                    <td><?= $row['tahun'] ?></td>
-                    <td><?= $row['bulan_bayar'] ?></td>
-                    <td><?= number_format($row['nominal'],2,',','.'); ?></td>
-                    <td><?= number_format($row['jumlah_bayar'],2,',','.'); ?></td>
-                    <td><?= number_format($kekurangan,2,',','.'); ?></td>
-                    <td><?= $row['tgl_bayar'] ?></td>
-                    <td><?= $row['nama_petugas'] ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $row['nisn'] ?></td>
+                        <td><?= $row['nama'] ?></td>
+                        <td><?= $row['nama_kelas'] ?></td>
+                        <td><?= $row['tahun'] ?></td>
+                        <td><?= $row['bulan_bayar'] ?></td>
+                        <td><?= number_format($row['nominal'],2,',','.'); ?></td>
+                        <td><?= number_format($row['jumlah_bayar'],2,',','.'); ?></td>
+                        <td><?= number_format($kekurangan,2,',','.'); ?></td>
+                        <td><?= $row['tgl_bayar'] ?></td>
+                        <td><?= $row['nama_petugas'] ?></td>
+                    </tr>
 
 
-                <?php } ?>
+                    <?php } ?>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </div>
     <div class="card-footer"></div>
+
 </div>

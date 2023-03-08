@@ -263,7 +263,23 @@ input::-webkit-inner-spin-button {
   border: none !important;
   box-shadow: none !important;
 }
-
+@media print {
+  * {
+    display: none !important;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    color: #000000 !important;
+    background-color: #c95050 !important;
+  }
+  #printableTable {
+    display: block;
+  }
+  table {
+    border: 1px solid !important;
+  }
+}
 @media screen and (min-width: 844px) {
   body {
     margin: calc(var(--header-height) + 1rem) 0 0 0;

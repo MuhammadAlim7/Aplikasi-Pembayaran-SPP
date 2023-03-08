@@ -64,13 +64,18 @@ $(document).ready(function() {
     }else{
         $nisn = ($_SESSION["nisn"]);
     }
-    $query = mysqli_query($kon, "SELECT nama FROM siswa WHERE nisn=$nisn");
+    $query = mysqli_query($kon, "SELECT nama,nama_kelas FROM siswa,kelas WHERE nisn=$nisn AND siswa.id_kelas=kelas.id_kelas");
     while ($banner_nama = mysqli_fetch_array($query)) {
         ?>
-    <div class="card-header">
-        Histori Pembayaran <?= $banner_nama['nama'] ?>
+    <div class="card-header px-2">
+        <a href="?m=halaman&p=pembayaran" class="px-2 " title="Kembali"><i class="fa-solid fa-angles-left"></i></a>
+        Histori Pembayaran
+        <?= $banner_nama['nama'] ?>
+        <?= $banner_nama['nama_kelas'] ?>
     </div>
+
     <?php } ?>
+
     <div class="card-body">
 
         <table class="table table-bordered" id="myTable">
@@ -78,7 +83,6 @@ $(document).ready(function() {
                 <tr>
                     <th>No</th>
                     <th>NISN</th>
-                    <th>Kelas</th>
                     <th>Tahun SPP</th>
                     <th>Bulan SPP</th>
                     <th>Nominal Dibayar</th>
@@ -119,7 +123,6 @@ $(document).ready(function() {
                 <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $row['nisn'] ?></td>
-                    <td><?= $row['nama_kelas'] ?></td>
                     <td><?= $row['tahun'] ?></td>
                     <td><?= $row['bulan_bayar'] ?></td>
                     <td><?= number_format($row['nominal'],2,',','.'); ?></td>
@@ -146,7 +149,7 @@ $(document).ready(function() {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel1">Hapus Data?</h1>
+                                <h1 class="modal-title" id="exampleModalLabel1">Hapus Data?</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
 
@@ -154,7 +157,7 @@ $(document).ready(function() {
                             <div class="modal-body">
                                 <form role="form" method="post" action="">
                                     <div class="box-body px-3">
-                                        <div class="form-group mb-3">
+                                        <div class="form-group ">
                                             <input type="hidden" name="id_pembayaran"
                                                 value="<?= $row['id_pembayaran'] ?>" class="gelap form-control"
                                                 required>
@@ -163,9 +166,9 @@ $(document).ready(function() {
                                             <label for="">Jumlah Bayar</label>
                                             <input type="" name="jumlah_bayar"
                                                 value="<?= number_format($row['jumlah_bayar'],2,',','.'); ?>"
-                                                class="gelap form-control" required>
+                                                class="gelap form-control" required disabled>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-1">
                                             <button type="submit" class="red btn btn-sm" name="hapus"
                                                 title="Simpan Data">
                                                 Hapus</button>
@@ -174,9 +177,9 @@ $(document).ready(function() {
                                                 Kembali</a>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
+                            <div class="modal-footer"></div>
 
                         </div>
                     </div>

@@ -269,7 +269,7 @@ $(document).ready(function() {
                                             <input type="text" name="tahun" class="form-control" placeholder="Tahun"
                                                 required>
                                         </div>
-                                        <div class=" mb-4">
+                                        <div class=" mb-1">
                                             <label for="nominal">Nominal</label>
                                             <input type="number" name="nominal" class="form-control"
                                                 placeholder="Nominal" required>

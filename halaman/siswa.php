@@ -117,7 +117,7 @@ $(document).ready(function() {
         "lengthMenu": [
             [5, 10],
             [5, 10]
-        ],
+        ]
     });
 });
 </script>
@@ -371,7 +371,7 @@ $(document).ready(function() {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
+                                <h1 class="modal-title " id="exampleModalLabel">Tambah Data</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -440,7 +440,7 @@ $(document).ready(function() {
                                             </div>
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="mb-1">
                                             <button type="submit" class="blue btn btn-sm " name="tambah"
                                                 title="Simpan Data">
                                                 Simpan</button>
@@ -454,6 +454,7 @@ $(document).ready(function() {
 
                                 </form>
                             </div>
+                            <div class="modal-footer"></div>
 
 
                         </div>

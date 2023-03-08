@@ -1,7 +1,7 @@
-<!-- <?php
-header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-header("Content-Disposition: attactment; filename=Laporan-Pembayaran-SPP.xls");
-?> -->
+<?php
+
+echo "<script>window.print();</script>"
+?>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,6 +32,7 @@ header("Content-Disposition: attactment; filename=Laporan-Pembayaran-SPP.xls");
                 <th>Nama</th>
                 <th>Kelas</th>
                 <th>Tahun SPP</th>
+                <th>Bulan SPP</th>
                 <th>Nominal Dibayar</th>
                 <th>Sudah Dibayar</th>
                 <th>Kekurangan</th>
@@ -49,7 +50,7 @@ header("Content-Disposition: attactment; filename=Laporan-Pembayaran-SPP.xls");
                 AND siswa.id_kelas=kelas.id_kelas 
                 AND pembayaran.id_spp=spp.id_spp 
                 AND pembayaran.id_petugas=petugas.id_petugas 
-                ORDER BY tgl_bayar DESC";
+                ORDER BY tgl_bayar ASC";
                 $query = mysqli_query($kon, $sql);
                 foreach($query as $row){
                     $data_pembayaran = mysqli_query($kon, "SELECT SUM(jumlah_bayar) as jumlah_bayar FROM pembayaran WHERE nisn='$row[nisn]'");
@@ -64,6 +65,7 @@ header("Content-Disposition: attactment; filename=Laporan-Pembayaran-SPP.xls");
                 <td><?= $row['nama'] ?></td>
                 <td><?= $row['nama_kelas'] ?></td>
                 <td><?= $row['tahun'] ?></td>
+                <td><?= $row['bulan_bayar'] ?></td>
                 <td><?= number_format($row['nominal'],2,',','.'); ?></td>
                 <td><?= number_format($row['jumlah_bayar'],2,',','.'); ?></td>
                 <td><?= number_format($kekurangan,2,',','.'); ?></td>

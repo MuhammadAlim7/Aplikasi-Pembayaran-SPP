@@ -263,6 +263,7 @@ input::-webkit-inner-spin-button {
   border: none !important;
   box-shadow: none !important;
 }
+
 @media screen and (min-width: 844px) {
   body {
     margin: calc(var(--header-height) + 1rem) 0 0 0;
